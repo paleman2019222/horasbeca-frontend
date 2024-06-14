@@ -1,8 +1,6 @@
 <!-- home.component.html -->
 <div class="container" *ngIf="user.role=='ROLE_USER'">
-    <div class="sidebar">
-     
-    </div>
+    <div class="sidebar"></div>
     <div class="content">
       <h1>Actividades</h1>
       <h2>Horas totales: {{user.hours}} / 200</h2>
@@ -30,16 +28,9 @@
       </table>
     </div>
   </div>
-
+  
   <div class="container" *ngIf="user.role=='ROLE_ADMIN'">
-    
-    <div class="sidebar">
-      <div>
-
-      </div>
-      <div>
-      </div>
-    </div>
+    <div class="sidebar"></div>
     <div class="content">
       <h1>Todas las atividades</h1>
       <h2>Admin</h2>
@@ -52,6 +43,7 @@
             <th>Lugar</th>
             <th>Fecha</th>
             <th>Horas</th>
+            <th>Acciones</th> <!-- Columna para acciones -->
           </tr>
         </thead>
         <tbody>
@@ -62,6 +54,9 @@
             <td>{{ activity.place }}</td>
             <td>{{ activity.date }}</td>
             <td>{{ activity.hours }}</td>
+            <td>
+              <button (click)="deleteActivity(activity._id)">Eliminar</button> <!-- Botón de eliminación -->
+            </td>
           </tr>
         </tbody>
       </table>
