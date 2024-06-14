@@ -8,6 +8,7 @@ import { RestUserService } from '../../services/rest-user.service';
 })
 export class HomeComponent implements OnInit {
   public activities: any[] = [];
+  public allactivities: any[] = [];
   public user: any="";
 
   constructor(private restUserService: RestUserService) { }
@@ -16,7 +17,7 @@ export class HomeComponent implements OnInit {
      this.user = this.restUserService.getUser();
    
       this.loadUserActivities();
-
+      this.AllUserActivities();
   }
 
   loadUserActivities(): void {
@@ -29,4 +30,18 @@ export class HomeComponent implements OnInit {
       }
     );
   }
+  //Ver todas las actividades como administrador
+  AllUserActivities(): void {
+    this.restUserService.getUserAllActivities(this.user._id).subscribe(
+      (response) => {
+        this.allactivities = response.activities;
+        console.log(this.allactivities);
+      },
+      (error) => {
+        console.error('Error loading user activities', error);
+      }
+    );
+  }
+
+
 }
