@@ -1,4 +1,77 @@
-.navbar{
-    background-color: black;
-    color: blue;
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+.playfair-display-fuente {
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
 }
+
+.montserrat-uniquifier {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.custom-navbar {
+  background-color: #356F43;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  border-bottom: 2px solid #ccc;
+  padding: 10px 20px; /* Añade un poco de espacio alrededor del contenido */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Añade una sombra ligera para darle profundidad */
+  transition: background-color 0.3s ease-in-out; /* Transición suave para el cambio de fondo */
+}
+
+.custom-navbar:hover {
+  background-color: #2a5233; /* Color de fondo ligeramente más oscuro al pasar el cursor */
+}
+
+.custom-navbar .navbar-brand,
+.custom-navbar .nav-link {
+  color: #fff;
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out; /* Transición suave para el cambio de color y transformación */
+}
+
+.custom-navbar .nav-link:hover {
+  color: #ffffff; /* Color de resaltado */
+  transform: scale(1.1); /* Escala el enlace un poco para resaltarlo */
+}
+
+.custom-navbar .navbar-toggler-icon {
+  filter: invert(1);
+}
+
+/* Añadir efecto de subrayado animado */
+.custom-navbar .nav-link::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #00C900;
+  transition: width 0.3s;
+}
+
+.custom-navbar .nav-link:hover::after {
+  width: 100%;
+}
+
+/* Estilo para la marca */
+.custom-navbar .navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .custom-navbar {
+    padding: 10px;
+  }
+  .custom-navbar .navbar-brand {
+    font-size: 1.2rem;
+  }
+  .custom-navbar .nav-link {
+    padding: 10px;
+  }
+}
+
+
+  
