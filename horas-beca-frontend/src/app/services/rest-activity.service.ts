@@ -23,6 +23,22 @@ export class RestActivityService {
         })
     }
 
+    getUser(){
+      let userCookie = this.cookieService.get('user');
+      if(userCookie){
+        let user = JSON.parse(userCookie);
+  
+        if(user){
+          this.user = user;
+        }else{
+          this.user= null;
+        }
+      }else{
+        this.user=null;
+      }
+      return this.user;
+    }
+
     public extractData(res: Response){
         let body = res;
         return body || [] || {}
