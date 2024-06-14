@@ -11,7 +11,9 @@ import Swal from 'sweetalert2';
 export class HomeComponent implements OnInit {
   public activities: any[] = [];
   public allactivities: any[] = [];
+  public students: any[] = [];
   public user: any = "";
+  public showModal: boolean = false;
 
   constructor(
     private restUserService: RestUserService,
@@ -47,6 +49,27 @@ export class HomeComponent implements OnInit {
     );
   }
 
+  viewStudents(activityId: string): void {
+    this.restActivityService.getActivityUsers(activityId, this.user._id).subscribe(
+      (response) => {
+        this.students = response.users;
+      },
+      (error) => {
+        console.error('Error loading students', error);
+        Swal.fire({
+          title: 'Error',
+          text: 'No se pudieron cargar los estudiantes. Verifique que la ruta del backend esté correcta.',
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
+      }
+    );
+  }
+
+  closeModal(): void {
+    this.showModal = false;
+  }
+
   confirmDeleteActivity(activityId: string): void {
     Swal.fire({
       title: '¿Estás seguro?',
@@ -64,8 +87,8 @@ export class HomeComponent implements OnInit {
     });
   }
 
-      deleteActivity(activityId: string): void {
-        this.restActivityService.deleteActivity(activityId, this.user._id).subscribe(
+  deleteActivity(activityId: string): void {
+    this.restActivityService.deleteActivity(activityId, this.user._id).subscribe(
       (response) => {
         Swal.fire({
           title: 'Eliminada!',

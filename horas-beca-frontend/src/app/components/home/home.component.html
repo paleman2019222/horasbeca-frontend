@@ -4,7 +4,7 @@
     <div class="content">
       <h1>Actividades</h1>
       <h2>Horas totales: {{user.hours}} / 200</h2>
-      <table>
+      <table class="table">
         <thead>
           <tr>
             <th>Seleccionar</th>
@@ -34,7 +34,7 @@
     <div class="content">
       <h1>Todas las atividades</h1>
       <h2>Admin</h2>
-      <table>
+      <table class="table">
         <thead>
           <tr>
             <th>Seleccionar</th>
@@ -55,11 +55,43 @@
             <td>{{ activity.date }}</td>
             <td>{{ activity.hours }}</td>
             <td>
-              <button (click)="confirmDeleteActivity(activity._id)" class="delete-btn">Eliminar</button>
+              <button (click)="confirmDeleteActivity(activity._id)" class="btn btn-danger">Eliminar</button>
+              <button (click)="viewStudents(activity._id)" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#studentModal">Ver Estudiantes</button>
             </td>
           </tr>
         </tbody>
       </table>
+    </div>
+  </div>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="studentModal" tabindex="-1" aria-labelledby="studentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="studentModalLabel">Lista de Estudiantes</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let student of students">
+                <td>{{ student.name }}</td>
+                <td>{{ student.email }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
     </div>
   </div>
   

@@ -63,7 +63,12 @@ export class RestActivityService {
       }
       //Obtiene todos los usuarios
       getAllUsers(userId: string): Observable<any> {
-        return this.http.get('${this.uri}getAllUsers/${userId}', this.httpOptionsAuth)
+        return this.http.get(`${this.uri}getAllUsers/${userId}`, this.httpOptionsAuth)
+          .pipe(map((res: any) => this.extractData(res)));
+      }
+
+      getActivityUsers(activityId: string, userId: string): Observable<any> {
+        return this.http.get(`${this.uri}getActivityUsers/${activityId}/${userId}`, this.httpOptionsAuth)
           .pipe(map((res: any) => this.extractData(res)));
       }
       
