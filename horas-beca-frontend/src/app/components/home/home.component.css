@@ -1,0 +1,82 @@
+/* home.component.css */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+  }
+  
+  .container {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .sidebar {
+    width: 200px;
+    background-color: #2e294e;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+  }
+  
+  .sidebar button {
+    background-color: #5863f8;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+  
+  .sidebar button:hover {
+    background-color: #4a53c8;
+  }
+  
+  .content {
+    flex-grow: 1;
+    background-color: #f4f4f4;
+    padding: 40px;
+  }
+  
+  h1 {
+    font-size: 2rem;
+    color: #3f3d56;
+    text-align: left;
+    margin-bottom: 20px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  thead {
+    background-color: #3f3d56;
+    color: white;
+  }
+  
+  thead th {
+    padding: 10px;
+    text-align: left;
+  }
+  
+  tbody tr {
+    border-bottom: 1px solid #ddd;
+  }
+  
+  tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  tbody td {
+    padding: 10px;
+  }
+  
+  input[type="checkbox"] {
+    transform: scale(1.5);
+  }
+  

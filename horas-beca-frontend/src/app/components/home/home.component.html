@@ -1,1 +1,38 @@
-<p>home works!</p>
+<!-- home.component.html -->
+<div class="container">
+    <div class="sidebar">
+      <div>
+        <button>SUMMA</button>
+        <button>CUM</button>
+      </div>
+      <div>
+        <button>LAUDE</button>
+      </div>
+    </div>
+    <div class="content">
+      <h1>Actividades</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Seleccionar</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Lugar</th>
+            <th>Fecha</th>
+            <th>Horas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let activity of activities">
+            <td><input type="checkbox"></td>
+            <td>{{ activity.name }}</td>
+            <td>{{ activity.description }}</td>
+            <td>{{ activity.place }}</td>
+            <td>{{ activity.date }}</td>
+            <td>{{ activity.hours }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
