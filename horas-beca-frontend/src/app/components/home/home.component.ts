@@ -14,7 +14,8 @@ export class HomeComponent implements OnInit {
   public students: any[] = [];
   public user: any = "";
   public showModal: boolean = false;
-
+  public selectedActivityId: string = "";
+  public allUsers: any[] = [];
   constructor(
     private restUserService: RestUserService,
     private restActivityService: RestActivityService
@@ -48,8 +49,31 @@ export class HomeComponent implements OnInit {
       }
     );
   }
+  unassignStudent(studentId: string): void {
+    this.restActivityService.unassignActivity(this.user._id, this.selectedActivityId, studentId).subscribe(
+      (response) => {
+        Swal.fire({
+          title: 'Desasignado!',
+          text: 'El estudiante ha sido desasignado de la actividad.',
+          icon: 'success',
+          confirmButtonText: 'Aceptar'
+        });
+        this.viewStudents(this.selectedActivityId); // Recargar la lista de estudiantes después de desasignar
+      },
+      (error) => {
+        Swal.fire({
+          title: 'Error',
+          text: 'No se pudo desasignar al estudiante. Verifique que la ruta del backend esté correcta.',
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
+        console.error('Error unassigning student', error);
+      }
+    );
+  }
 
   viewStudents(activityId: string): void {
+    this.selectedActivityId = activityId;
     this.restActivityService.getActivityUsers(activityId, this.user._id).subscribe(
       (response) => {
         this.students = response.users;
@@ -62,6 +86,47 @@ export class HomeComponent implements OnInit {
           icon: 'error',
           confirmButtonText: 'Aceptar'
         });
+      }
+    );
+  }
+  loadAllUsers(activityId:string): void {
+    this.selectedActivityId = activityId;
+    this.restActivityService.getAllUsers(this.user._id).subscribe(
+      (response) => {
+        this.allUsers = response.users;
+      },
+      (error) => {
+        console.error('Error loading all users', error);
+        Swal.fire({
+          title: 'Error',
+          text: 'No se pudieron cargar los usuarios. Verifique que la ruta del backend esté correcta.',
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
+      }
+    );
+  }
+
+  assignStudent(studentId: string): void {
+    
+    this.restActivityService.assignActivity(this.user._id, this.selectedActivityId, studentId).subscribe(
+      (response) => {
+        Swal.fire({
+          title: 'Asignado!',
+          text: 'El estudiante ha sido asignado a la actividad.',
+          icon: 'success',
+          confirmButtonText: 'Aceptar'
+        });
+        this.viewStudents(this.selectedActivityId); // Recargar la lista de estudiantes después de asignar
+      },
+      (error) => {
+        Swal.fire({
+          title: 'Error',
+          text: error.error.message,
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
+        console.error('Error assigning student', error);
       }
     );
   }

@@ -71,6 +71,17 @@ export class RestActivityService {
         return this.http.get(`${this.uri}getActivityUsers/${activityId}/${userId}`, this.httpOptionsAuth)
           .pipe(map((res: any) => this.extractData(res)));
       }
+
+      unassignActivity(adminId: string, activityId: string, userId: string): Observable<any> {
+        return this.http.post(`${this.uri}unassignActivity/${adminId}/${activityId}/${userId}`, {}, this.httpOptionsAuth)
+          .pipe(map((res: any) => this.extractData(res)));
+      }
+
+
+      assignActivity(adminId: string, activityId: string, userId: string): Observable<any> {
+        return this.http.put(`${this.uri}assignActivity/${adminId}/${activityId}/${userId}`, {}, this.httpOptionsAuth)
+          .pipe(map((res: any) => this.extractData(res)));
+      }
       
 
 }
