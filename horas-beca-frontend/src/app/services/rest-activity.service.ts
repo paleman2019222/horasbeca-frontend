@@ -43,7 +43,7 @@ export class RestActivityService {
         .pipe(map((res: any) => this.extractData(res)));
     }
 
-  
+      //Conectando con el backend la url de eliminar una actividad
       deleteActivity(activityId: string, userId: string): Observable<any> {
         const headers = new HttpHeaders({
           'Content-Type': 'application/json',
@@ -52,4 +52,20 @@ export class RestActivityService {
         return this.http.delete(`${this.uri}deleteActivity/${activityId}/${userId}`, { headers })
           .pipe(map((res: any) => this.extractData(res)));
       }
+      //Conectando con el backend la url de asignar una actividad
+      assingActivity(adminID: string,activityId: string, userId: string): Observable<any> {
+        const headers = new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': this.cookieService.get('token')
+        });
+        return this.http.delete(`${this.uri}assignActivity/${adminID}/${activityId}/${userId}`, { headers })
+          .pipe(map((res: any) => this.extractData(res)));
+      }
+      //Obtiene todos los usuarios
+      getAllUsers(userId: string): Observable<any> {
+        return this.http.get('${this.uri}getAllUsers/${userId}', this.httpOptionsAuth)
+          .pipe(map((res: any) => this.extractData(res)));
+      }
+      
+
 }
