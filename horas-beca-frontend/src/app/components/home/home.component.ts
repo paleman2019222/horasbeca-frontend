@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   constructor(private restUserService: RestUserService) { }
 
   ngOnInit(): void {
-     this.user = this.restUserService.getUser();
+      this.user = this.restUserService.getUser();
    
       this.loadUserActivities();
       this.AllUserActivities();
