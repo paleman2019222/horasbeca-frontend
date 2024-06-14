@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RestUserService } from '../../services/rest-user.service';
-import { RestActivityService } from '../../services/rest-activity.service'; // Asegúrate de importar el servicio
+import { RestActivityService } from '../../services/rest-activity.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private restUserService: RestUserService,
-    private restActivityService: RestActivityService // Asegúrate de inyectar el servicio
+    private restActivityService: RestActivityService
   ) {}
 
   ngOnInit(): void {
@@ -46,13 +47,41 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  deleteActivity(activityId: string): void {
-    this.restActivityService.deleteActivity(activityId, this.user._id).subscribe(
+  confirmDeleteActivity(activityId: string): void {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "No podrás revertir esta acción!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar!',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.deleteActivity(activityId);
+      }
+    });
+  }
+
+      deleteActivity(activityId: string): void {
+        this.restActivityService.deleteActivity(activityId, this.user._id).subscribe(
       (response) => {
-        console.log('Activity deleted successfully');
+        Swal.fire({
+          title: 'Eliminada!',
+          text: 'La actividad ha sido eliminada.',
+          icon: 'success',
+          confirmButtonText: 'Aceptar'
+        });
         this.loadAllActivities(); // Reload the activities after deletion
       },
       (error) => {
+        Swal.fire({
+          title: 'Error',
+          text: error.error.message,
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
         console.error('Error deleting activity', error);
       }
     );
