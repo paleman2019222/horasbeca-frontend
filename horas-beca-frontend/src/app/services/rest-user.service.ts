@@ -60,4 +60,9 @@ export class RestUserService {
     return this.http.get(`${this.uri}getUserActivities/${userId}`, this.httpOptionsAuth)
     .pipe(map((res:any) => this.extractData(res)));
   }
+  //metodo que llama al backend
+  getUserAllActivities(userId: string): Observable<any> {
+    return this.http.get(`${this.uri}getAllActivities/${userId}`, this.httpOptionsAuth)
+    .pipe(map((res:any) => this.extractData(res)));
+  }
 }

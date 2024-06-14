@@ -1,17 +1,10 @@
 <!-- home.component.html -->
 <div class="container" *ngIf="user.role=='ROLE_USER'">
-    <div class="sidebar">
-      <div>
-        <button>SUMMA</button>
-        <button>CUM</button>
-      </div>
-      <div>
-        <button>LAUDE</button>
-      </div>
-    </div>
+    <div class="sidebar"></div>
     <div class="content">
       <h1>Actividades</h1>
-      <table>
+      <h2>Horas totales: {{user.hours}} / 200</h2>
+      <table class="table">
         <thead>
           <tr>
             <th>Seleccionar</th>
@@ -35,20 +28,16 @@
       </table>
     </div>
   </div>
-
+  
   <div class="container" *ngIf="user.role=='ROLE_ADMIN'">
-    
-    <div class="sidebar">
-      <div>
-
-      </div>
-      <div>
-      </div>
-    </div>
+    <div class="sidebar"></div>
     <div class="content">
       <h1>Todas las atividades</h1>
       <h2>Admin</h2>
-      <table>
+      <button class="btn btn-secondary" data-bs-toggle="modal"  [routerLink]="['/new-activity']">
+        Crear actividad
+      </button>
+      <table class="table">
         <thead>
           <tr>
             <th>Seleccionar</th>
@@ -57,19 +46,99 @@
             <th>Lugar</th>
             <th>Fecha</th>
             <th>Horas</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let activity of activities">
+          <tr *ngFor="let activity of allactivities">
             <td><input type="checkbox"></td>
             <td>{{ activity.name }}</td>
             <td>{{ activity.description }}</td>
             <td>{{ activity.place }}</td>
             <td>{{ activity.date }}</td>
             <td>{{ activity.hours }}</td>
+            <td>
+              <button (click)="confirmDeleteActivity(activity._id)" class="btn btn-danger">Eliminar</button>
+              <button (click)="viewStudents(activity._id)" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#studentModal">Ver Estudiantes</button>
+              <button (click)="loadAllUsers(activity._id)" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#assignStudentModal">Asignar Estudiantes</button>
+            </td>
           </tr>
         </tbody>
       </table>
+    </div>
+  </div>
+  
+  <!-- Modal Ver Estudiantes -->
+  <div class="modal fade" id="studentModal" tabindex="-1" aria-labelledby="studentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="studentModalLabel">Lista de Estudiantes</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Rol</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let student of students">
+                <td>{{ student.name }}</td>
+                <td>{{ student.email }}</td>
+                <td>{{ student.role }}</td>
+                <td>
+                  <button (click)="unassignStudent(student._id)" class="btn btn-danger">Desasignar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal Asignar Estudiantes -->
+  <div class="modal fade" id="assignStudentModal" tabindex="-1" aria-labelledby="assignStudentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="assignStudentModalLabel">Asignar Estudiantes</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Rol</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of allUsers">
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.role }}</td>
+                <td>
+                  <button (click)="assignStudent(user._id)" class="btn btn-primary">Asignar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
     </div>
   </div>
   
