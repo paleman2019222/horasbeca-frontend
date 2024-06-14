@@ -10,7 +10,6 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { CookieService } from 'ngx-cookie-service';
 import { NewActivityComponent } from './components/new-activity/new-activity.component';
-
 @NgModule({
   declarations: [
     AppComponent,
