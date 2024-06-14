@@ -6,10 +6,11 @@ import { CookieService } from 'ngx-cookie-service';
 import { Activity } from '../models/activity.model';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
+export class RestActivityService {
 
-export class RestUserService {
+
     public token: any;
     public user: string | null="";
     public uri:any;
@@ -41,4 +42,14 @@ export class RestUserService {
         return this.http.post(`${this.uri}saveActivity/${userId}`, params, { headers })
         .pipe(map((res: any) => this.extractData(res)));
     }
+
+  
+      deleteActivity(activityId: string, userId: string): Observable<any> {
+        const headers = new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': this.cookieService.get('token')
+        });
+        return this.http.delete(`${this.uri}deleteActivity/${activityId}/${userId}`, { headers })
+          .pipe(map((res: any) => this.extractData(res)));
+      }
 }
