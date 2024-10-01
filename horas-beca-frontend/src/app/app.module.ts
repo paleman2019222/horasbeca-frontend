@@ -10,13 +10,15 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { CookieService } from 'ngx-cookie-service';
 import { NewActivityComponent } from './components/new-activity/new-activity.component';
+import { ActivitiesComponent } from './components/activities/activities.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
     NavBarComponent,
-    NewActivityComponent
+    NewActivityComponent,
+    ActivitiesComponent
   ],
   imports: [
     BrowserModule,

@@ -1,28 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
-
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@100..900&display=swap');
 
 
 *{
-    font-family: "Montserrat", sans-serif;
-    font-optical-sizing: auto;
-}
-
-.playfair-display-fuente {
-  font-family: "Playfair Display", serif;
+  font-family: "Open Sans", sans-serif;
   font-optical-sizing: auto;
 }
 
-.montserrat-uniquifier {
-  font-family: "Montserrat", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-}
 
 .custom-navbar {
-  background-color: #356F43;
+  background-color: #0B9E51;
   color: #fff;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   border-bottom: 2px solid #ccc;
   padding: 10px 20px; /* Añade un poco de espacio alrededor del contenido */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Añade una sombra ligera para darle profundidad */
@@ -30,7 +18,7 @@
 }
 
 .custom-navbar:hover {
-  background-color: #2a5233; /* Color de fondo ligeramente más oscuro al pasar el cursor */
+  background-color: #0E8346; /* Color de fondo ligeramente más oscuro al pasar el cursor */
 }
 
 .custom-navbar .navbar-brand,
