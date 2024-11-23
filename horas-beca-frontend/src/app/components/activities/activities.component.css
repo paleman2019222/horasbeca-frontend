@@ -10,20 +10,26 @@ body {
 /* Contenedor principal */
 .card-container {
     display: flex;
-    flex-wrap: wrap; /* Permite varias tarjetas en filas */
+    flex-wrap: wrap;
+    /* Permite varias tarjetas en filas */
     justify-content: center;
-    gap: 20px; /* Espaciado entre tarjetas */
+    gap: 20px;
+    /* Espaciado entre tarjetas */
     margin-top: 50px;
 }
 
 /* Tarjeta */
 .card {
-    background-color: #f7fbe7; /* Fondo claro */
-    border: 1px solid #008000; /* Borde verde */
+    background-color: #f7fbe7;
+    /* Fondo claro */
+    border: 1px solid #008000;
+    /* Borde verde */
     padding: 15px;
-    width: 600px; /* Ajuste del ancho */
+    width: 600px;
+    /* Ajuste del ancho */
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* Sombra ligera */
 }
 
 /* Encabezado de la tarjeta */
@@ -37,14 +43,16 @@ body {
 .card-title {
     font-weight: bold;
     font-size: 1.2em;
-    color: #005f00; /* Verde oscuro */
+    color: #005f00;
+    /* Verde oscuro */
 }
 
 /* Contenedor de horas y botón */
 .hours-container {
     display: flex;
     align-items: center;
-    gap: 10px; /* Espaciado entre elementos */
+    gap: 10px;
+    /* Espaciado entre elementos */
 }
 
 /* Estilo del texto de horas */
@@ -69,7 +77,8 @@ body {
     cursor: pointer;
     font-size: 0.9em;
     transition: background-color 0.2s;
-    margin-left: auto; /* Alinea el botón al final */
+    margin-left: auto;
+    /* Alinea el botón al final */
 }
 
 .assign-btn:hover {
@@ -87,3 +96,98 @@ body {
     color: #005f00;
 }
 
+/* Estilo para la tabla */
+.table-green {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #4CAF50;
+    background-color: #f9fff9;
+    /* Fondo claro para combinar con el verde */
+}
+
+.table-green th,
+.table-green td {
+    border: 1px solid #4CAF50;
+    padding: 8px;
+    text-align: left;
+}
+
+.table-green th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.table-green tr:nth-child(even) {
+    background-color: #dfffd6;
+    /* Fila par con un tono verde claro */
+}
+
+.table-green tr:hover {
+    background-color: #c8f6b4;
+    /* Efecto hover */
+}
+
+/* Botones verdes */
+.button-green {
+    background-color: #4CAF50;
+    /* Fondo verde */
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.button-green:hover {
+    background-color: #45a049;
+    /* Más oscuro al pasar el mouse */
+}
+
+.button-Dgreen {
+    background-color: #2e7d32;
+    /* Verde más oscuro */
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.button-Dgreen:hover {
+    background-color: #1b5e20;
+    /* Aún más oscuro al pasar el mouse */
+}
+
+/* Botones rojos */
+.button-red {
+    background-color: #d32f2f;
+    /* Rojo intenso */
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.button-red:hover {
+    background-color: #b71c1c;
+    /* Rojo más oscuro al pasar el mouse */
+}
