@@ -15,8 +15,11 @@
                             <span class="card-title">{{ activity.name }}</span>
                             <div class="hours-container">
                                 <span class="card-hours">Horas</span>
-                                <span class="card-hours-value">{{ activity.hours
-                                    }}</span>
+                                <span
+                                    class="card-hours-value">{{activity.hours}}</span>
+                                <button
+                                    (click)="assignSelfToActivity(activity._id)"
+                                    class="button-Dgreen">Asignar</button>
                             </div>
                         </div>
                         <div class="card-body">

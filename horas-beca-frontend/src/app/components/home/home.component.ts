@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit {
       }
     );
   }
-  
+
   unassignStudent(studentId: string): void {
     this.restActivityService.unassignActivity(this.user._id, this.selectedActivityId, studentId).subscribe(
       (response) => {
@@ -142,6 +142,7 @@ export class HomeComponent implements OnInit {
       }
     );
   }
+
   assignSelfToActivity(SelectedActivityId: string): void {
     //console.log("Actividad seleccionada:", SelectedActivityId);
     this.restActivityService.assignByStudent(this.selectedActivity._id, this.user._id).subscribe(
@@ -217,11 +218,11 @@ export class HomeComponent implements OnInit {
     );
   }
 
-//Separar actividades pasadas y proximas
-separateActivities(): void {
-  const currentDate = new Date();
-  this.pastActivities = this.activities.filter(activity => new Date(activity.date) < currentDate);
-  this.upcomingActivities = this.activities.filter(activity => new Date(activity.date) >= currentDate);
-}
+  //Separar actividades pasadas y proximas
+  separateActivities(): void {
+    const currentDate = new Date();
+    this.pastActivities = this.activities.filter(activity => new Date(activity.date) < currentDate);
+    this.upcomingActivities = this.activities.filter(activity => new Date(activity.date) >= currentDate);
+  }
 
 }

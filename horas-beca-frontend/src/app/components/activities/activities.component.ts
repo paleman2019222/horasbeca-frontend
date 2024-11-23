@@ -152,7 +152,7 @@ export class ActivitiesComponent {
   }
   assignSelfToActivity(SelectedActivityId: string): void {
     //console.log("Actividad seleccionada:", SelectedActivityId);
-    this.restActivityService.assignByStudent(this.selectedActivity._id, this.user._id).subscribe(
+    this.restActivityService.assignByStudent(SelectedActivityId, this.user._id).subscribe(
       (response) => {
         Swal.fire({
           title: '¡Actividad asignada!',
@@ -249,5 +249,6 @@ export class ActivitiesComponent {
       }
     );
   }
+
 
 }
