@@ -10,6 +10,8 @@ import Swal from 'sweetalert2';
 })
 export class HomeComponent implements OnInit {
   public activities: any[] = [];
+  public pastActivities: any[] = [];
+  public upcomingActivities: any[] = [];
   public allactivities: any[] = [];
   public students: any[] = [];
   public user: any = "";
@@ -58,6 +60,7 @@ export class HomeComponent implements OnInit {
       }
     );
   }
+  
   unassignStudent(studentId: string): void {
     this.restActivityService.unassignActivity(this.user._id, this.selectedActivityId, studentId).subscribe(
       (response) => {
@@ -213,4 +216,12 @@ export class HomeComponent implements OnInit {
       }
     );
   }
+
+//Separar actividades pasadas y proximas
+separateActivities(): void {
+  const currentDate = new Date();
+  this.pastActivities = this.activities.filter(activity => new Date(activity.date) < currentDate);
+  this.upcomingActivities = this.activities.filter(activity => new Date(activity.date) >= currentDate);
+}
+
 }

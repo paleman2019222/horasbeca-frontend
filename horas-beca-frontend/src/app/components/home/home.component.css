@@ -125,3 +125,69 @@
   }
   
 
+/* CSS ADMIN */
+.admin-home {
+  margin: 0 20px; /* Márgenes a la derecha e izquierda */
+}
+
+.admin-home .search-bar {
+  display: flex;
+  margin-bottom: 20px;
+  background-color: #e8f5e9;  
+  padding: 10px;
+  border-radius: 5px;
+  width: 49.5%; /* Ajusta el ancho de la barra de búsqueda */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.admin-home .search-bar input {
+  flex: 1;
+  border: none;
+  padding: 10px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+}
+
+.admin-home .search-bar button {
+  background-color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+.admin-home .sections {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; /* Distribuye el espacio entre los cuadros */
+  gap: 20px;
+  width: 100%;
+}
+
+.admin-home .past-activities, .admin-home .upcoming-activities {
+  flex: 1;
+  background-color: #e8f5e9;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  height: 300px; /* Ajusta el tamaño según tus necesidades */
+}
+
+
+.admin-home .d-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.admin-home .table {
+  width: 100%;
+  table-layout: auto;
+}
+
+.admin-home .btn-group {
+  display: flex;
+  gap: 10px;
+}
