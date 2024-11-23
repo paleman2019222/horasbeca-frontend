@@ -15,16 +15,25 @@ export class HomeComponent implements OnInit {
   public user: any = "";
   public showModal: boolean = false;
   public selectedActivityId: string = "";
+  public selectedActivity: any = null; // Variable para almacenar la actividad seleccionada
   public allUsers: any[] = [];
   constructor(
     private restUserService: RestUserService,
     private restActivityService: RestActivityService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.user = this.restUserService.getUser();
-    this.loadUserActivities();
-    this.loadAllActivities();
+    if (!this.user || !this.user._id) {
+      console.error('Usuario no inicializado o inválido.');
+      return;
+    }
+    console.log("Datos del usuario:", this.user);
+    if (this.user.role === 'admin') {
+      this.loadAllActivities();
+    } else {
+      this.loadUserActivities();
+    }
   }
 
   loadUserActivities(): void {
@@ -89,7 +98,7 @@ export class HomeComponent implements OnInit {
       }
     );
   }
-  loadAllUsers(activityId:string): void {
+  loadAllUsers(activityId: string): void {
     this.selectedActivityId = activityId;
     this.restActivityService.getAllUsers(this.user._id).subscribe(
       (response) => {
@@ -108,7 +117,7 @@ export class HomeComponent implements OnInit {
   }
 
   assignStudent(studentId: string): void {
-    
+
     this.restActivityService.assignActivity(this.user._id, this.selectedActivityId, studentId).subscribe(
       (response) => {
         Swal.fire({
@@ -130,6 +139,30 @@ export class HomeComponent implements OnInit {
       }
     );
   }
+  assignSelfToActivity(SelectedActivityId: string): void {
+    //console.log("Actividad seleccionada:", SelectedActivityId);
+    this.restActivityService.assignByStudent(this.selectedActivity, this.user._id).subscribe(
+      (response) => {
+        Swal.fire({
+          title: '¡Actividad asignada!',
+          text: 'Te has asignado correctamente a la actividad.',
+          icon: 'success',
+          confirmButtonText: 'Aceptar'
+        });
+      },
+      (error) => {
+        Swal.fire({
+          title: 'Error',
+          text: error.error.message,
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
+        console.error('Error al asignarse a la actividad', error);
+      }
+    );
+  }
+
+
 
   closeModal(): void {
     this.showModal = false;
@@ -151,6 +184,12 @@ export class HomeComponent implements OnInit {
       }
     });
   }
+  setSelectedActivity(activity: any): void {
+    this.selectedActivity = activity;
+    console.log("Actividad seleccionada:", this.selectedActivity);
+  }
+
+
 
   deleteActivity(activityId: string): void {
     this.restActivityService.deleteActivity(activityId, this.user._id).subscribe(

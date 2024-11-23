@@ -11,93 +11,98 @@ import { Activity } from '../models/activity.model';
 export class RestActivityService {
 
 
-    public token: any;
-    public user: string | null="";
-    public uri:any;
-    public role:any;
+  public token: any;
+  public user: string | null = "";
+  public uri: any;
+  public role: any;
 
-    public httpOptionsAuth = {
-        headers: new HttpHeaders({
-            'Content-Type': 'application/json',
-            'Authorization': this.cookieService.get('token')
-        })
+  public httpOptionsAuth = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.cookieService.get('token')
+    })
+  }
+
+  getUser() {
+    let userCookie = this.cookieService.get('user');
+    if (userCookie) {
+      let user = JSON.parse(userCookie);
+
+      if (user) {
+        this.user = user;
+      } else {
+        this.user = null;
+      }
+    } else {
+      this.user = null;
     }
+    return this.user;
+  }
 
-    getUser(){
-      let userCookie = this.cookieService.get('user');
-      if(userCookie){
-        let user = JSON.parse(userCookie);
-  
-        if(user){
-          this.user = user;
-        }else{
-          this.user= null;
-        }
-      }else{
-        this.user=null;
-      }
-      return this.user;
-    }
+  public extractData(res: Response) {
+    let body = res;
+    return body || [] || {}
+  }
 
-    public extractData(res: Response){
-        let body = res;
-        return body || [] || {}
-    }
-    
-    constructor(private http: HttpClient, private cookieService: CookieService) { 
-        this.uri = CONNECTION.URI;
-    }
+  constructor(private http: HttpClient, private cookieService: CookieService) {
+    this.uri = CONNECTION.URI;
+  }
 
-    addActivity(activity: Activity, userId: string): Observable<any> {
-        const token = this.cookieService.get('token');
-        const headers = new HttpHeaders({
-            'Content-Type': 'application/json',
-            'Authorization': token
-        });
-        let params = JSON.stringify(activity);
-        return this.http.post(`${this.uri}saveActivity/${userId}`, params, { headers })
-        .pipe(map((res: any) => this.extractData(res)));
-    }
+  addActivity(activity: Activity, userId: string): Observable<any> {
+    const token = this.cookieService.get('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': token
+    });
+    let params = JSON.stringify(activity);
+    return this.http.post(`${this.uri}saveActivity/${userId}`, params, { headers })
+      .pipe(map((res: any) => this.extractData(res)));
+  }
 
-      //Conectando con el backend la url de eliminar una actividad
-      deleteActivity(activityId: string, userId: string): Observable<any> {
-        const headers = new HttpHeaders({
-          'Content-Type': 'application/json',
-          'Authorization': this.cookieService.get('token')
-        });
-        return this.http.delete(`${this.uri}deleteActivity/${activityId}/${userId}`, { headers })
-          .pipe(map((res: any) => this.extractData(res)));
-      }
-      //Conectando con el backend la url de asignar una actividad
-      assingActivity(adminID: string,activityId: string, userId: string): Observable<any> {
-        const headers = new HttpHeaders({
-          'Content-Type': 'application/json',
-          'Authorization': this.cookieService.get('token')
-        });
-        return this.http.delete(`${this.uri}assignActivity/${adminID}/${activityId}/${userId}`, { headers })
-          .pipe(map((res: any) => this.extractData(res)));
-      }
-      //Obtiene todos los usuarios
-      getAllUsers(userId: string): Observable<any> {
-        return this.http.get(`${this.uri}getAllUsers/${userId}`, this.httpOptionsAuth)
-          .pipe(map((res: any) => this.extractData(res)));
-      }
+  //Conectando con el backend la url de eliminar una actividad
+  deleteActivity(activityId: string, userId: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.cookieService.get('token')
+    });
+    return this.http.delete(`${this.uri}deleteActivity/${activityId}/${userId}`, { headers })
+      .pipe(map((res: any) => this.extractData(res)));
+  }
+  //Conectando con el backend la url de asignar una actividad
+  assingActivity(adminID: string, activityId: string, userId: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.cookieService.get('token')
+    });
+    return this.http.delete(`${this.uri}assignActivity/${adminID}/${activityId}/${userId}`, { headers })
+      .pipe(map((res: any) => this.extractData(res)));
+  }
+  //Obtiene todos los usuarios
+  getAllUsers(userId: string): Observable<any> {
+    return this.http.get(`${this.uri}getAllUsers/${userId}`, this.httpOptionsAuth)
+      .pipe(map((res: any) => this.extractData(res)));
+  }
 
-      getActivityUsers(activityId: string, userId: string): Observable<any> {
-        return this.http.get(`${this.uri}getActivityUsers/${activityId}/${userId}`, this.httpOptionsAuth)
-          .pipe(map((res: any) => this.extractData(res)));
-      }
+  getActivityUsers(activityId: string, userId: string): Observable<any> {
+    return this.http.get(`${this.uri}getActivityUsers/${activityId}/${userId}`, this.httpOptionsAuth)
+      .pipe(map((res: any) => this.extractData(res)));
+  }
 
-      unassignActivity(adminId: string, activityId: string, userId: string): Observable<any> {
-        return this.http.post(`${this.uri}unassignActivity/${adminId}/${activityId}/${userId}`, {}, this.httpOptionsAuth)
-          .pipe(map((res: any) => this.extractData(res)));
-      }
+  unassignActivity(adminId: string, activityId: string, userId: string): Observable<any> {
+    return this.http.post(`${this.uri}unassignActivity/${adminId}/${activityId}/${userId}`, {}, this.httpOptionsAuth)
+      .pipe(map((res: any) => this.extractData(res)));
+  }
 
 
-      assignActivity(adminId: string, activityId: string, userId: string): Observable<any> {
-        return this.http.put(`${this.uri}assignActivity/${adminId}/${activityId}/${userId}`, {}, this.httpOptionsAuth)
-          .pipe(map((res: any) => this.extractData(res)));
-      }
-      
+  assignActivity(adminId: string, activityId: string, userId: string): Observable<any> {
+    return this.http.put(`${this.uri}assignActivity/${adminId}/${activityId}/${userId}`, {}, this.httpOptionsAuth)
+      .pipe(map((res: any) => this.extractData(res)));
+  }
+
+  assignByStudent(activityId: string, studentId: string): Observable<any> {
+    return this.http.put(`${this.uri}assignByStudent/${activityId}/${studentId}`, {}, this.httpOptionsAuth)
+      .pipe(map((res: any) => this.extractData(res)));
+  }
+
 
 }

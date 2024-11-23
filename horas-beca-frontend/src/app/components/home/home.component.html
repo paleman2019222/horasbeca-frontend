@@ -1,20 +1,21 @@
 
-      <!-- home.component.html -->
+<!-- home.component.html -->
 <div class="all">
   <div class="nologin" *ngIf="user==null">
-    <h1>Inicia sesión para acceder al contenido de <strong>Horas beca UVG</strong></h1>
+    <h1>Inicia sesión para acceder al contenido de <strong>Horas beca
+        UVG</strong></h1>
   </div>
 
   <div class="container mt-5" *ngIf="user">
     <div class="row">
-      
+
       <div class="col-md-9 content">
         <div *ngIf="user.role=='ROLE_USER'">
           <h1 class="text-center mb-4 fs-5">Bienvenido {{user.name}}</h1>
           <h2 class="text-center mb-4">Horas totales: {{user.hours}} / 20</h2>
           <table class="table table-striped table-hover">
             <thead class="table ">
-              <tr >
+              <tr>
                 <th style="width: 200px;">Nombre</th>
                 <th>Fecha</th>
                 <th>Horas</th>
@@ -27,7 +28,14 @@
                 <td>{{ activity.date }}</td>
                 <td>{{ activity.hours }}</td>
                 <td>
-                  <img src="src/assets/img/lista-de-texto.png" >
+                  <button type="button" class="btn" data-bs-toggle="modal"
+                    data-bs-target="#activityDetailsModal"
+                    style="border: none; background: none;"
+                    (click)="setSelectedActivity(activity)">
+                    <img src="assets/img/lista-de-texto.png" alt="Abrir Modal"
+                      style="width: 50px; height: 50px;">
+                  </button>
+
                 </td>
               </tr>
             </tbody>
@@ -36,7 +44,8 @@
         <div *ngIf="user.role=='ROLE_ADMIN'">
           <div class="d-flex justify-content-between align-items-center mb-3">
             <h1 class="mb-0">Todas las atividades</h1>
-            <button class="btn btn-primary" [routerLink]="['/new-activity']">Crear actividad</button>
+            <button class="btn btn-primary"
+              [routerLink]="['/new-activity']">Crear actividad</button>
           </div>
           <table class="table table-striped table-hover">
             <thead class="table-dark">
@@ -54,9 +63,15 @@
                 <td>{{ activity.hours }}</td>
                 <td>
                   <div class="btn-group" role="group">
-                    <button (click)="confirmDeleteActivity(activity._id)" class="btn btn-danger">Eliminar</button>
-                    <button (click)="viewStudents(activity._id)" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#studentModal">Ver Estudiantes</button>
-                    <button (click)="loadAllUsers(activity._id)" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#assignStudentModal">Asignar Estudiantes</button>
+                    <button (click)="confirmDeleteActivity(activity._id)"
+                      class="btn btn-danger">Eliminar</button>
+                    <button (click)="viewStudents(activity._id)"
+                      class="btn btn-info" data-bs-toggle="modal"
+                      data-bs-target="#studentModal">Ver Estudiantes</button>
+                    <button (click)="loadAllUsers(activity._id)"
+                      class="btn btn-secondary" data-bs-toggle="modal"
+                      data-bs-target="#assignStudentModal">Asignar
+                      Estudiantes</button>
                   </div>
                 </td>
               </tr>
@@ -66,14 +81,17 @@
       </div>
     </div>
   </div>
-  
+
   <!-- Modal Ver Estudiantes -->
-  <div class="modal fade" id="studentModal" tabindex="-1" aria-labelledby="studentModalLabel" aria-hidden="true">
+  <div class="modal fade" id="studentModal" tabindex="-1"
+    aria-labelledby="studentModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="studentModalLabel">Lista de Estudiantes</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <h5 class="modal-title" id="studentModalLabel">Lista de
+            Estudiantes</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"
+            aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <table class="table table-hover">
@@ -91,26 +109,31 @@
                 <td>{{ student.email }}</td>
                 <td>{{ student.role }}</td>
                 <td>
-                  <button (click)="unassignStudent(student._id)" class="btn btn-danger">Desasignar</button>
+                  <button (click)="unassignStudent(student._id)"
+                    class="btn btn-danger">Desasignar</button>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-secondary"
+            data-bs-dismiss="modal">Cerrar</button>
         </div>
       </div>
     </div>
   </div>
-  
+
   <!-- Modal Asignar Estudiantes -->
-  <div class="modal fade" id="assignStudentModal" tabindex="-1" aria-labelledby="assignStudentModalLabel" aria-hidden="true">
+  <div class="modal fade" id="assignStudentModal" tabindex="-1"
+    aria-labelledby="assignStudentModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="assignStudentModalLabel">Asignar Estudiantes</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <h5 class="modal-title" id="assignStudentModalLabel">Asignar
+            Estudiantes</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"
+            aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <table class="table table-hover">
@@ -128,16 +151,47 @@
                 <td>{{ user.email }}</td>
                 <td>{{ user.role }}</td>
                 <td>
-                  <button (click)="assignStudent(user._id)" class="btn btn-primary">Asignar</button>
+                  <button (click)="assignStudent(user._id)"
+                    class="btn btn-primary">Asignar</button>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-secondary"
+            data-bs-dismiss="modal">Cerrar</button>
         </div>
       </div>
     </div>
   </div>
+  <!-- Modal descropcion -->
+  <div class="modal fade" id="activityDetailsModal" tabindex="-1"
+    aria-labelledby="activityDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="activityDetailsModalLabel">Detalles de la
+            Actividad</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"
+            aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Aquí mostramos los datos de la actividad seleccionada -->
+          <p><strong>Nombre:</strong> {{ selectedActivity?.name }}</p>
+          <p><strong>Descripción:</strong> {{ selectedActivity?.description
+            }}</p>
+          <p><strong>Fecha:</strong> {{ selectedActivity?.date }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary"
+            data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-success"
+            (click)="assignSelfToActivity(selectedActivity?._id)">Asignar</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
