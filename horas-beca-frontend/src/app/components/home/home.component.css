@@ -166,14 +166,20 @@
 
 .admin-home .past-activities, .admin-home .upcoming-activities {
   flex: 1;
-  background-color: #e8f5e9;
+  background-color: #e8f5e9; /* Color de fondo */
   padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px; /* Bordes redondeados */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
   margin-bottom: 20px;
-  height: 300px; /* Ajusta el tamaño según tus necesidades */
+  border: 1px solid #e0e0e0; /* Añadir borde */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición para el efecto hover */
+  /* Eliminar la altura fija */
 }
 
+.admin-home .past-activities:hover, .admin-home .upcoming-activities:hover {
+  transform: translateY(-5px); /* Efecto de elevación */
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada en hover */
+}
 
 .admin-home .d-flex {
   display: flex;
@@ -185,6 +191,9 @@
 .admin-home .table {
   width: 100%;
   table-layout: auto;
+  font-family: 'Arial', sans-serif; /* Mejorar tipografía */
+  font-size: 14px; /* Ajustar tamaño de fuente */
+  color: #333; /* Color de texto */
 }
 
 .admin-home .btn-group {
