@@ -7,7 +7,7 @@
     <div class="container mt-5" *ngIf="user">
         <div class="row">
 
-            <div ngIf="user.role=='ROLE_USER'">
+            <div *ngIf="user.role=='ROLE_USER'">
                 <div class="card-container" *ngFor="let activity of activities">
                     <!-- Usamos *ngFor para iterar sobre las actividades -->
                     <div class="card">
@@ -17,7 +17,6 @@
                                 <span class="card-hours">Horas</span>
                                 <span class="card-hours-value">{{ activity.hours
                                     }}</span>
-                                <button class="assign-btn">Asignar</button>
                             </div>
                         </div>
                         <div class="card-body">
