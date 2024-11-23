@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
       return;
     }
     console.log("Datos del usuario:", this.user);
-    if (this.user.role === 'admin') {
+    if (this.user.role === 'ROLE_ADMIN') {
       this.loadAllActivities();
     } else {
       this.loadUserActivities();
@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
   }
 
   loadUserActivities(): void {
-    this.restUserService.getUserActivities(this.user._id).subscribe(
+    this.restActivityService.getAllActivities(this.user._id).subscribe(
       (response) => {
         this.activities = response.activities;
       },
@@ -141,7 +141,7 @@ export class HomeComponent implements OnInit {
   }
   assignSelfToActivity(SelectedActivityId: string): void {
     //console.log("Actividad seleccionada:", SelectedActivityId);
-    this.restActivityService.assignByStudent(this.selectedActivity, this.user._id).subscribe(
+    this.restActivityService.assignByStudent(this.selectedActivity._id, this.user._id).subscribe(
       (response) => {
         Swal.fire({
           title: '¡Actividad asignada!',
