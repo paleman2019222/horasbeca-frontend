@@ -20,6 +20,7 @@ export class ActivitiesComponent {
   public selectedActivity: any = null; // Variable para almacenar la actividad seleccionada
   public allUsers: any[] = [];
   public newActivity: Activity = new Activity('', '', '', '', '');
+  public qrImage: string | null = null; // Almacena la URL de la imagen del QR
 
   constructor(
     private restActivityService: RestActivityService,
@@ -35,6 +36,8 @@ export class ActivitiesComponent {
       this.loadAllActivities();
     }
   }
+
+
   //metodo para obtener las actividades
   getAllActivities(): void {
     this.restActivityService.getAllActivities(this.user._id).subscribe(
@@ -57,6 +60,28 @@ export class ActivitiesComponent {
       }
     );
   }
+
+  loadQR(activityId: string): void {
+    this.qrImage = null; // Reinicia la imagen
+    this.restActivityService.getActivityQR(activityId).subscribe(
+        (blob: Blob) => {
+            const reader = new FileReader();
+            reader.onload = () => {
+                this.qrImage = reader.result as string; // Convierte el Blob en una URL de imagen
+            };
+            reader.readAsDataURL(blob);
+        },
+        (error) => {
+            console.error('Error al cargar el código QR:', error);
+            Swal.fire({
+                title: 'Error',
+                text: 'No se pudo cargar el código QR. Por favor, intenta nuevamente.',
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+            });
+        }
+    );
+}
 
   loadAllActivities(): void {
     this.restUserService.getUserAllActivities(this.user._id).subscribe(

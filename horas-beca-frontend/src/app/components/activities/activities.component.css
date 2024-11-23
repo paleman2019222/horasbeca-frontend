@@ -191,3 +191,19 @@ body {
     background-color: #b71c1c;
     /* Rojo más oscuro al pasar el mouse */
 }
+
+.qr-image {
+    width: 300px;
+    height: 300px;
+    max-width: 100%;
+    object-fit: contain;
+    margin: 0 auto;
+}
+
+.modal-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}

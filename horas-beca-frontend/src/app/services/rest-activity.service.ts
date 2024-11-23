@@ -110,4 +110,13 @@ export class RestActivityService {
     .pipe(map((res:any) => this.extractData(res)));
   }
 
+  getActivityQR(activityId: string): Observable<Blob> {
+    const url = `${this.uri}/activityqr/${activityId}`;
+    const headers = new HttpHeaders({
+        'Authorization': this.cookieService.get('token')
+    });
+
+    return this.http.get(url, { headers, responseType: 'blob' });
+}
+
 }

@@ -31,12 +31,9 @@
                 </div>
             </div>
             <div *ngIf="user.role=='ROLE_ADMIN'">
-                <div
-                    class="d-flex justify-content-between align-items-center mb-3">
-                    <h1 class="mb-0">Todas las atividades</h1>
-                    <button type="button" class="button-Dgreen"
-                        data-bs-toggle="modal"
-                        data-bs-target="#addActivityModal">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h1 class="mb-0">Todas las actividades</h1>
+                    <button type="button" class="button-Dgreen" data-bs-toggle="modal" data-bs-target="#addActivityModal">
                         Agregar Actividad
                     </button>
                 </div>
@@ -56,20 +53,38 @@
                             <td>{{ activity.hours }}</td>
                             <td>
                                 <div class="btn-group" role="group">
-                                    <button
-                                        (click)="confirmDeleteActivity(activity._id)"
-                                        class="button-red">Eliminar</button>
-                                    <button (click)="viewStudents(activity._id)"
-                                        class="button-green"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#studentModal">Ver
-                                        Estudiantes</button>
+                                    <button (click)="confirmDeleteActivity(activity._id)" class="button-red">Eliminar</button>
+                                    <button (click)="viewStudents(activity._id)" class="button-green" data-bs-toggle="modal"
+                                        data-bs-target="#studentModal">Ver Estudiantes</button>
+                                    <button class="button-blue" data-bs-toggle="modal" data-bs-target="#qrModal"
+                                        (click)="loadQR(activity._id)">QR</button>
                                 </div>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+            
+            <!-- Modal para mostrar el QR -->
+            <div class="modal fade" id="qrModal" tabindex="-1" aria-labelledby="qrModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="qrModalLabel">Código QR</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <img *ngIf="qrImage" [src]="qrImage" alt="QR de la Actividad" class="qr-image">
+                            <p *ngIf="!qrImage">Cargando código QR...</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
             <div class="modal fade" id="studentModal" tabindex="-1"
                 aria-labelledby="studentModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
