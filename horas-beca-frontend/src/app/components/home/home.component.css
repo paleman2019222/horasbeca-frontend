@@ -191,3 +191,24 @@
   display: flex;
   gap: 10px;
 }
+
+.admin-home .past-activities ul, .admin-home .upcoming-activities ul {
+  list-style-type: none; /* Quitar viñetas */
+  padding: 0;
+  margin: 0;
+}
+
+.admin-home .past-activities li, .admin-home .upcoming-activities li {
+  background-color: #f9f9f9; /* Color de fondo de los elementos de la lista */
+  padding: 10px 15px; /* Margen y padding */
+  border-bottom: 1px solid #e0e0e0; /* Borde inferior */
+  transition: background-color 0.3s ease; /* Transición para el efecto hover */
+}
+
+.admin-home .past-activities li:hover, .admin-home .upcoming-activities li:hover {
+  background-color: #e0f7fa; /* Color de fondo en hover */
+}
+
+.admin-home .past-activities li:last-child, .admin-home .upcoming-activities li:last-child {
+  border-bottom: none; /* Quitar borde inferior del último elemento */
+}
