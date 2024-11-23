@@ -104,5 +104,10 @@ export class RestActivityService {
       .pipe(map((res: any) => this.extractData(res)));
   }
 
+  //Obtener las actividades
+  getAllActivities(userId: string): Observable<any> {
+    return this.http.get(`${this.uri}getAllActivitiesU/${userId}`, this.httpOptionsAuth)
+    .pipe(map((res:any) => this.extractData(res)));
+  }
 
 }
