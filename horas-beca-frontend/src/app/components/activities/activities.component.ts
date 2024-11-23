@@ -18,17 +18,19 @@ export class ActivitiesComponent {
   public allUsers: any[] = [];
 
   constructor(
-    private restActivityService: RestActivityService
+    private restActivityService: RestActivityService,
+    private restUserService: RestUserService
   ) { }
 
   ngOnInit(): void {
-    this.user = this.restActivityService.getUser();
+    this.user = this.restUserService.getUser();
+    this.getAllActivities();
     if (!this.user || !this.user._id) {
       console.error('Usuario no inicializado o inválido.');
       return;
     }
   }
-
+  //metodo para obtener las actividades
   getAllActivities(): void {
     this.restActivityService.getAllActivities(this.user._id).subscribe(
       (response) => {
@@ -40,7 +42,8 @@ export class ActivitiesComponent {
     );
   }
 
-  
+
+
 
 
 }
