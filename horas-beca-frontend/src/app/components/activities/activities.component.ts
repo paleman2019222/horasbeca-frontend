@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { RestUserService } from '../../services/rest-user.service';
 import { RestActivityService } from '../../services/rest-activity.service';
+import { Activity } from '../../models/activity.model';
+import { Router } from '@angular/router';
+
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-activities',
@@ -16,10 +19,12 @@ export class ActivitiesComponent {
   public selectedActivityId: string = "";
   public selectedActivity: any = null; // Variable para almacenar la actividad seleccionada
   public allUsers: any[] = [];
+  public newActivity: Activity = new Activity('', '', '', '', '');
 
   constructor(
     private restActivityService: RestActivityService,
-    private restUserService: RestUserService
+    private restUserService: RestUserService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -219,9 +224,30 @@ export class ActivitiesComponent {
       }
     );
   }
-
-
-
-
+  //metodo para obtener las actividades de un usuario
+  onSubmit(): void {
+    this.restActivityService.addActivity(this.newActivity, this.user._id).subscribe(
+      (response) => {
+        Swal.fire({
+          title: 'Éxito!',
+          text: 'Actividad agregada correctamente.',
+          icon: 'success',
+          confirmButtonText: 'Aceptar'
+        }).then(() => {
+          this.newActivity = new Activity('', '', '', '', ''); // Limpiar el formulario
+          this.router.navigate(['/activities']); // Redirigir al home
+        });
+      },
+      (error) => {
+        Swal.fire({
+          title: 'Error',
+          text: error.error.message || 'Hubo un error al agregar la actividad.',
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
+        console.error('Error al agregar actividad:', error);
+      }
+    );
+  }
 
 }

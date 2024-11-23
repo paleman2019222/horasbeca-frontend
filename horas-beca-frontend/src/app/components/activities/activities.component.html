@@ -31,9 +31,11 @@
                 <div
                     class="d-flex justify-content-between align-items-center mb-3">
                     <h1 class="mb-0">Todas las atividades</h1>
-                    <button class="btn btn-primary"
-                        [routerLink]="['/new-activity']">Crear
-                        actividad</button>
+                    <button type="button" class="btn btn-primary"
+                        data-bs-toggle="modal"
+                        data-bs-target="#addActivityModal">
+                        Agregar Actividad
+                    </button>
                 </div>
                 <table class="table table-striped table-hover">
                     <thead class="table-dark">
@@ -155,4 +157,61 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="addActivityModal" tabindex="-1"
+        aria-labelledby="addActivityModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addActivityModalLabel">Agregar
+                        Nueva Actividad</h5>
+                    <button type="button" class="btn-close"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form (submit)="onSubmit()">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="name"
+                                name="name" [(ngModel)]="newActivity.name"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description"
+                                class="form-label">Descripción</label>
+                            <textarea class="form-control" id="description"
+                                name="description"
+                                [(ngModel)]="newActivity.description" rows="4"
+                                required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="place" class="form-label">Lugar</label>
+                            <input type="text" class="form-control" id="place"
+                                name="place" [(ngModel)]="newActivity.place"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="date" class="form-label">Fecha</label>
+                            <input type="date" class="form-control" id="date"
+                                name="date" [(ngModel)]="newActivity.date"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="hours" class="form-label">Horas</label>
+                            <input type="number" class="form-control" id="hours"
+                                name="hours" [(ngModel)]="newActivity.hours"
+                                required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit"
+                                class="btn btn-primary">Agregar
+                                Actividad</button>
+                            <button type="button" class="btn btn-secondary"
+                                data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>

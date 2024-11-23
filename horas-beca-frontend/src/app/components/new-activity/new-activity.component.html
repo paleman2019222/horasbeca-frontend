@@ -9,31 +9,38 @@
           <form (submit)="onSubmit()">
             <div class="mb-3">
               <label for="name" class="form-label">Nombre</label>
-              <input type="text" class="form-control" id="name" name="name" [(ngModel)]="newActivity.name" required>
+              <input type="text" class="form-control" id="name" name="name"
+                [(ngModel)]="newActivity.name" required>
             </div>
 
             <div class="mb-3">
               <label for="description" class="form-label">Descripción</label>
-              <textarea class="form-control" id="description" name="description" [(ngModel)]="newActivity.description" rows="4" required></textarea>
+              <textarea class="form-control" id="description" name="description"
+                [(ngModel)]="newActivity.description" rows="4"
+                required></textarea>
             </div>
 
             <div class="mb-3">
               <label for="place" class="form-label">Lugar</label>
-              <input type="text" class="form-control" id="place" name="place" [(ngModel)]="newActivity.place" required>
+              <input type="text" class="form-control" id="place" name="place"
+                [(ngModel)]="newActivity.place" required>
             </div>
 
             <div class="mb-3">
               <label for="date" class="form-label">Fecha</label>
-              <input type="date" class="form-control" id="date" name="date" [(ngModel)]="newActivity.date" required>
+              <input type="date" class="form-control" id="date" name="date"
+                [(ngModel)]="newActivity.date" required>
             </div>
 
             <div class="mb-3">
               <label for="hours" class="form-label">Horas</label>
-              <input type="number" class="form-control" id="hours" name="hours" [(ngModel)]="newActivity.hours" required>
+              <input type="number" class="form-control" id="hours" name="hours"
+                [(ngModel)]="newActivity.hours" required>
             </div>
 
             <div class="d-grid gap-2">
-              <button type="submit" class="btn btn-primary">Agregar Actividad</button>
+              <button type="submit" class="btn btn-primary">Agregar
+                Actividad</button>
             </div>
           </form>
         </div>
@@ -41,5 +48,3 @@
     </div>
   </div>
 </div>
-
-
