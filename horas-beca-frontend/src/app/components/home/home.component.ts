@@ -33,6 +33,8 @@ export class HomeComponent implements OnInit {
     console.log("Datos del usuario:", this.user);
     if (this.user.role === 'ROLE_ADMIN') {
       this.loadAllActivities();
+     
+      
     } else {
       this.loadUserActivities();
     }
@@ -41,6 +43,7 @@ export class HomeComponent implements OnInit {
   loadUserActivities(): void {
     this.restActivityService.getAllActivities(this.user._id).subscribe(
       (response) => {
+        console.log('HOLA')
         this.activities = response.activities;
       },
       (error) => {
@@ -53,6 +56,7 @@ export class HomeComponent implements OnInit {
     this.restUserService.getUserAllActivities(this.user._id).subscribe(
       (response) => {
         this.allactivities = response.activities;
+        this.classifyActivities(); 
         console.log(this.allactivities);
       },
       (error) => {
@@ -218,11 +222,32 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  //Separar actividades pasadas y proximas
-  separateActivities(): void {
+  classifyActivities(): void {
+    if (!this.allactivities || this.allactivities.length === 0) {
+        console.warn('No hay actividades para clasificar.');
+        return;
+    }
+
     const currentDate = new Date();
-    this.pastActivities = this.activities.filter(activity => new Date(activity.date) < currentDate);
-    this.upcomingActivities = this.activities.filter(activity => new Date(activity.date) >= currentDate);
-  }
+
+    this.pastActivities = this.allactivities.filter(activity => {
+        const activityDate = new Date(activity.date);
+        return activityDate < currentDate;
+    });
+
+    this.upcomingActivities = this.allactivities.filter(activity => {
+        const activityDate = new Date(activity.date);
+        return activityDate >= currentDate;
+    });
+
+    console.log('Actividades pasadas:', this.pastActivities);
+    console.log('Actividades próximas:', this.upcomingActivities);
+}
+
+
+
+
+
+
 
 }
